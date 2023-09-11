@@ -1,0 +1,4 @@
+Django==4.2.4
+pymongo==4.5
+dnspython>=1.16
+textract==1.6.5
