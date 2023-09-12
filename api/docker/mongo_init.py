@@ -1,27 +1,28 @@
-# init-mongo.py
 from pymongo import MongoClient
 
-print('hffhdfkghkjdf')
+# Create a MongoClient instance
+client = MongoClient('db', 27017)  # Replace with your container's hostname and port
 
-# # Connect to MongoDB
-# client = MongoClient('mongodb://root:example@db:27017/')
+# Get a reference to the "attackflow" database
+db = client['attackflow']
 
-# # Create or access the database
-# db = client['mydatabase']
+# List of collection names to check/create
+collections = ['current_documents', 'pending_documents', 'legacy_documents', 'rejected_documents', 'users']
 
-# # Create collections
-# users_collection = db['users']
-# current_docs_collection = db['current_docs']
-# pending_docs_collection = db['pending_docs']
-# legacy_docs_collection = db['legacy_docs']
-# rejected_docs_collection = db['rejected_docs']
+# Check if the "attackflow" database exists
+if 'attackflow' not in client.list_database_names():
+    print("Creating 'attackflow' database...")
+    # Create the "attackflow" database if it doesn't exist
+    db = client['attackflow']
+else:
+    print(f'Database {db} found!')
+    print(f"it contains {db.list_collection_names()}")
 
-# # Optionally, insert some initial data into collections
-# users_collection.insert_many([
-#     {"username": "user1", "email": "user1@example.com"},
-#     {"username": "user2", "email": "user2@example.com"},
-# ])
+# Check and create collections if necessary
+for collection_name in collections:
+    if collection_name not in db.list_collection_names():
+        print(f"Creating '{collection_name}' collection...")
+        db.create_collection(collection_name)
 
-# # You can insert data into other collections similarly if needed
-# # Create a user
-# print(users_collection.find({}))
+# Close the MongoDB connection
+client.close()

@@ -3,19 +3,18 @@ version: '3'
 # services that we will ne running
 
 services:
-  web: 
+  sep_back_up: 
     # we add the directory in which the project exists
     build: .
     # host address
-    command: python manage.py runserver 0.0.0.0:8000
+    command: sh -c "python manage.py runserver 0.0.0.0:8000"
     # volumes save data - data is lost when docker is shut down
     ports:
       - "8000:8000"
     depends_on:
-      # ensures django starts after mongo DB
       - db
-    env_file:
-      - .env
+
+
 
   db:
     image: mongo:latest
@@ -23,6 +22,10 @@ services:
       - "27017:27017"
     volumes:
       - ./mongo_init.py:/app
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=example
+
+  mongo-init:
+    build:
+      context: .
+    depends_on:
+      - db
+    command: python mongo_init.py

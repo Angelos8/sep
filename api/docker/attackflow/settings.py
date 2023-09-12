@@ -80,31 +80,7 @@ WSGI_APPLICATION = 'attackflow.wsgi.application'
 #         'ENGINE': 'django.db.backends.sqlite3',
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
-# MongoDB connection settings
-    # 'default': {
-    #     'ENGINE': 'djongo',
-    #     'NAME': 'your-db-name',
-    #     'USER': 'root',
-    # }
-# }
 
-################## DATABASE##########################
-# # environment variables to be used by the containers for connection
-# MONGO_DB_HOST = os.environ.get('DJANGO_DB_HOST', 'localhost')
-# MONGO_DB_PORT = int(os.environ.get('DJANGO_DB_PORT', '27017'))
-# MONGO_DB_NAME = os.environ.get('DJANGO_DB_NAME', 'mydatabase')
-# MONGO_DB_USER = os.environ.get('DJANGO_DB_USER', '')
-# MONGO_DB_PASSWORD = os.environ.get('DJANGO_DB_PASSWORD', '')
-# MONGO_URI = f'mongodb://{MONGO_DB_USER}:{MONGO_DB_PASSWORD}@{MONGO_DB_HOST}:{MONGO_DB_PORT}/{MONGO_DB_NAME}'
-# MONGO_URI = os.environ.get('MONGO_URI')
-
-# if MONGO_URI:
-#     client = pymongo.MongoClient(MONGO_URI)
-# else:
-#     raise Exception("MONGO_URI environment variable is not defined.")
-
-
-################## DATABASE##########################
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

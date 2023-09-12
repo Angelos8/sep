@@ -5,9 +5,23 @@ from django.shortcuts import redirect, render
 from django.views import View
 from pymongo import MongoClient
 
+# create Mongo DB client for connecting to the database
+client = MongoClient('db', 27017) 
+# get attackflow database
+db = client['attackflow']
+
+
 # return login page
 def login_page(request: HttpRequest):
-    return HttpResponse('<p>login page</p>')
+    collections = db.list_collection_names()
+     # Convert the list to a string
+    collections_str = ', '.join(collections)
+    
+    # Create an HTML response with the collections
+    response_html = f'<p>Collections: {collections_str}</p>'
+    
+    return HttpResponse(response_html)
+    # return HttpResponse('<p> home page </p>')
 
 # process login request
 def login(request: HttpRequest):

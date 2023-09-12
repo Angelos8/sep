@@ -15,4 +15,6 @@ RUN pip install -r requirements.txt
 # copy the folder from vs code to the container in the app folder
 COPY . /app/
 
+CMD ["python", "mongo_init.py"]
+
 RUN ["echo", "help"]
