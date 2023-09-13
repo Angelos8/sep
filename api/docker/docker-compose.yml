@@ -24,6 +24,7 @@ services:
       - "27017:27017"
     volumes:
       - ./mongo_init.py:/app
+      - mongodb_data:/data/db
 
   mongo-init:
     build:
@@ -31,3 +32,7 @@ services:
     depends_on:
       - db
     command: python mongo_init.py
+
+# Define the named volume for MongoDB data persistence
+volumes:
+  mongodb_data:

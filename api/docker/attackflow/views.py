@@ -12,16 +12,8 @@ db = client['attackflow']
 
 
 # return login page
-def login_page(request: HttpRequest):
-    collections = db.list_collection_names()
-     # Convert the list to a string
-    collections_str = ', '.join(collections)
-    
-    # Create an HTML response with the collections
-    response_html = f'<p>Collections: {collections_str}</p>'
-    
-    return HttpResponse(response_html)
-    # return HttpResponse('<p> home page </p>')
+def login_page(request: HttpRequest): 
+    return HttpResponse('<p> home page </p>')
 
 # process login request
 def login(request: HttpRequest):
@@ -63,7 +55,15 @@ def create_annotations(request: HttpRequest):
     pass
 
 def home_page(request: HttpRequest):
-    return HttpResponse('<p>home page</p>')
+    collections = db.list_collection_names()
+     # Convert the list to a string
+    collections_str = ', '.join(collections)
+    
+    # Create an HTML response with the collections
+    response_html = f'<p>Collections: {collections_str}</p>'
+    
+    return HttpResponse(response_html)
+    # return HttpResponse('<p>home page</p>')
 
 def settings_page(request: HttpRequest):
     pass
