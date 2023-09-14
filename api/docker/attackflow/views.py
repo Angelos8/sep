@@ -11,35 +11,29 @@ client = MongoClient('db', 27017)
 db = client['attackflow']
 
 # Pages
-def login_page(request: HttpRequest):
-    """
-
-    Args:
-        request (HttpRequest): HttpRequest
-
-    Returns:
-        HttpResponse: _description_
-    """
-    return HttpResponse('<p> home page </p>')
-
-# process login request
 def login(request: HttpRequest):
-    if request.method == 'POST':
-        return HttpResponse('successful login')
-    else:
-        return HttpResponse('get request')
+    return HttpResponse('<p> home page </p>')
 
 # process signup request
 def signup(request: HttpRequest):
     pass
 
+def create_user():
+    pass
+
+def verify_user():
+    pass
+
+def update_user():
+    pass
+
 # return user page
-def user_page(request: HttpRequest, user_id: int):
+def user(request: HttpRequest, user_id: int):
     pass
 
 # test for a class based view
 # handler for extractind data from the uploaded report
-def upload_report(request: HttpRequest):
+def create_pending_report(request: HttpRequest):
     if request.method =='POST':
         file = request.FILES['file']
         file_name = default_storage.save(file.name, file)

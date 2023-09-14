@@ -30,9 +30,9 @@ urlpatterns = [
     path('annotate/<int:report_id>/view/', views.annotation_view_page),
     path('annotate/<int:report_id>/edit/', views.annotation_edit_page),
     # Requests
-    path('json/users/login/', views.login),
-    path('json/users/signup/', views.signup),
-    path('json/current_reports/create', views.upload_report)
+    path('json/users/login/', views.verify_user),
+    path('json/users/signup/', views.create_user),
+    path('json/pending_reports/create', views.create_pending_report)
 ]
 
 """
