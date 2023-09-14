@@ -10,9 +10,16 @@ client = MongoClient('db', 27017)
 # get attackflow database
 db = client['attackflow']
 
+# Pages
+def login_page(request: HttpRequest):
+    """
 
-# return login page
-def login_page(request: HttpRequest): 
+    Args:
+        request (HttpRequest): HttpRequest
+
+    Returns:
+        HttpResponse: _description_
+    """
     return HttpResponse('<p> home page </p>')
 
 # process login request
@@ -56,7 +63,7 @@ def create_annotations(request: HttpRequest):
 
 def home_page(request: HttpRequest):
     collections = db.list_collection_names()
-     # Convert the list to a string
+    # Convert the list to a string
     collections_str = ', '.join(collections)
     
     # Create an HTML response with the collections
