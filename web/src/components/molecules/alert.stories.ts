@@ -3,6 +3,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 
 import Alert from './alert.vue';
+import Button from '@/web/src/components/atoms/button.vue';
 
 const meta: Meta<typeof Alert> = {
 	component: Alert,
@@ -11,6 +12,28 @@ const meta: Meta<typeof Alert> = {
 export default meta;
 type Story = StoryObj<typeof Alert>;
 
+// export default {
+// 	title: 'Molecules/Alert',
+// 	component: Alert,
+// };
+
+// const Template = (args, { argTypes }) => ({
+// 	components: { Alert, Button },
+// 	props: Object.keys(argTypes),
+// 	template: `
+// 	  <Alert v-bind="$props" @close="onClose">
+// 		This is an alert message.
+// 	  </Alert>
+// 	`,
+// 	methods: {
+// 	  onClose() {
+// 		console.log('Alert closed');
+// 	  },
+// 	},
+// });
+
+// export const Default = Template.bind({});
+// Default.args = {};
 
 export const Info: Story = {
 	render: (args: any) => ({
@@ -21,7 +44,8 @@ export const Info: Story = {
 		template: '<Alert v-bind="args" />',
 	}),
 	args: {
-		label: "Alert",
+		label: "Information Alert",
+		message: "Here is some important information",
 	},
 };
 
@@ -35,8 +59,8 @@ export const Failure: Story = {
 	}),
 	args: {
 		...Info.args,
-		label: 'This is a Secondy Alert',
-		primary: false,
+		label: 'Failure Alert',
+		message: "Letting you know that you failed >:(",
 	},
 };
 
@@ -50,8 +74,7 @@ export const Success: Story = {
 	}),
 	args: {
 		...Info.args,
-		label: 'Primary Small',
-		primary: true,
-		size: 'small',
+		label: 'Success Alert',
+		message: "Whoop whoop you passed :)"
 	},
 };
