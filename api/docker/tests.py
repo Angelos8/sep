@@ -5,7 +5,7 @@ from django.test import Client
 
 # simple script to test path requests and responses
 
-os.environ.setdefault("_MODULE", "attackflow.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "attackflow.settings")
 django.setup()
 
 c = Client()
@@ -17,8 +17,9 @@ c = Client()
 #     text = response.content.decode()
 #     print(text)
 
-response = c.post('/login_test/', {'username': 'test', 'password': 'test'})
+response = c.get('/login/')
 print(response.content)
-response = c.get('/login_test/')
+
+response = c.post('/upload_report/', {'test': 'pass'})
 print(response.content)
 

@@ -23,16 +23,19 @@ from . import views
 urlpatterns = [
     # Pages
     path('admin/', admin.site.urls),
-    path('', views.home),
-    path('login/', views.login),
-    path('users/<int>/', views.users),
-    path('annotate/<int:report_id>/', views.annotate_redirect),
-    path('annotate/<int:report_id>/view/', views.annotation_view_page),
-    path('annotate/<int:report_id>/edit/', views.annotation_edit_page),
-    # Requests
-    path('json/users/login/', views.verify_user),
-    path('json/users/signup/', views.create_user),
-    path('json/pending_reports/create', views.create_pending_report)
+    path('', views.home_view),
+    path('login/', views.login_view),
+    path('login/verify/', views.verify_login),
+    path('login/signup/', views.create_user),
+    path('users/', views.users_redirect), # redirect user to login page in not logged in
+    path('users/<int:user_id>', views.users_view),
+    path('users/<int:user_id>/settings', views.settings_view),
+    path('users/<int:user_id>/update', views.update_user),
+    path('users/<int:user_id>/delete', views.delete_user),
+    path('users/<int:user_id>/upload_report', views.upload_report),
+    path('annotate/<int:report_id>/edit', views.edit_annotations_view),
+    path('annotate/<int:report_id>/inspect', views.inspect_annotations_view),
+    path('annotate/new', views.annotate_new_report_view)
 ]
 
 """
