@@ -23,10 +23,19 @@ from . import views
 urlpatterns = [
     # Pages
     path('admin/', admin.site.urls),
-    path('', views.home_view),
-    path('login/', views.login_view),
-    path('login/verify/', views.verify_login),
-    path('login/signup/', views.create_user),
+    path('', views.home_view, name='home_page'),
+    path('deleteAll/', views.delete_all_users),
+    path('displayUser/', views.display_all_users),
+    path('login/', views.login, name='login_page'),
+    path('signup/', views.signup),
+    path('deleteAll/', views.delete_all_users),
+    path('logout/', views.logout),
+    path('displayUser/', views.display_all_users),
+    # path('login/', views.login_view, name='login_page'),
+    # path('login/verify/', views.verify_login,name='verify_login'),
+    # path('logout/', views.logout),
+    # path('signup/', views.signup_view),
+    # path('signup/verify/', views.verify_signup,name='verify_signup'),
     path('users/', views.users_redirect), # redirect user to login page in not logged in
     path('users/<int:user_id>', views.users_view),
     path('users/<int:user_id>/settings', views.settings_view),
