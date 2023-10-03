@@ -26,7 +26,8 @@
         },
         "report_plaintext": "String",
         "report_annotated_text": "HTMLString",
-        "tags": ["ObjectId"]
+        "tags": ["ObjectId"],
+        "user_id": "int"
     },
     
     "comment_2": "schema for legacy documents (im thinking we probably dont need to duplicate data that wont change over time?)",

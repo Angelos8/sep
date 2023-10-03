@@ -7,7 +7,7 @@ client = MongoClient('db', 27017)  # Replace with your container's hostname and 
 db = client['attackflow']
 
 # List of collection names to check/create
-collections = ['current_documents', 'pending_documents', 'legacy_documents', 'rejected_documents', 'users']
+collections = ['current_reports', 'pending_reports', 'legacy_reports', 'rejected_reports', 'users']
 
 # Check if the "attackflow" database exists
 if 'attackflow' not in client.list_database_names():
