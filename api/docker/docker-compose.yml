@@ -1,6 +1,6 @@
 # configurations that start and link containers
 version: '3'
-# services that we will ne running
+# services that we will be running
 
 services:
   sep_back_up: 

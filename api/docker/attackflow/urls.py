@@ -36,7 +36,7 @@ urlpatterns = [
     # path('logout/', views.logout),
     # path('signup/', views.signup_view),
     # path('signup/verify/', views.verify_signup,name='verify_signup'),
-    path('users/', views.users_redirect), # redirect user to login page in not logged in
+    path('users/', views.login_redirect), # redirect user to login page in not logged in
     path('users/<int:user_id>', views.users_view),
     path('users/<int:user_id>/settings', views.settings_view),
     path('users/<int:user_id>/update', views.update_user),

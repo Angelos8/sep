@@ -65,8 +65,6 @@ def home_view(request: HttpRequest):
     """
     return render(request, 'home.html')
 
-
-
 def login(request: HttpRequest): 
     """
     Summary: log in, if the request is get, return a simple html file with
@@ -85,16 +83,18 @@ def login(request: HttpRequest):
     # if the user has logged in, redirect to home page
     if 'user_id' in request.session:
         return redirect(reverse('home_page'))
+    
     if request.method == 'POST':
         # fill the form with info from post
-        form = logInForm(request.POST)
+        form = LoginForm(request.POST)
         # check if the submit form is valid
         if form.is_valid():
+            form_data = form.cleaned_data
             # connect to the database and save user info
             collection = db['users']
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user_info=collection.find_one({"username": username, "password":password})
+            username = form_data['username']
+            password = form_data['password']
+            user_info = collection.find_one({"username": username, "password": password})
             # if the user info is found, save the user id into current session cookie
             # display notice and redirct to home page
             if user_info:
@@ -109,7 +109,7 @@ def login(request: HttpRequest):
 
     else:
         # get empty form when the request is not post
-        form = logInForm()
+        form = LoginForm()
     return render(request, 'login_page.html', context={'form': form})
 
 # process signup request
@@ -133,7 +133,7 @@ def signup(request: HttpRequest):
         return redirect(reverse('home_page'))
     if request.method == 'POST':
         # fill the form with info from post
-        form = signUpForm(request.POST)
+        form = SignupForm(request.POST)
         # check if the submit form is valid
         if form.is_valid():
             # connect to the database and save user info
@@ -171,10 +171,8 @@ def signup(request: HttpRequest):
             return redirect(reverse('login_page'))  
     else:
         # get empty form when the request is not post
-        form = signUpForm()
+        form = SignupForm()
     return render(request, 'sign_up_page.html', {'form': form})
-
-
 
 def login_view(request: HttpRequest):
     """
@@ -254,7 +252,7 @@ def verify_login(request: HttpRequest):
 
     pass
 
-def users_redirect(request: HttpRequest):
+def login_redirect(request: HttpRequest):
     """
     Summary: 
         Conditional redirect to login page or user page
@@ -273,6 +271,9 @@ def users_redirect(request: HttpRequest):
     """
     if 'user_id' in request.session:
         return redirect(reverse('home_page'))
+    
+    else:
+        return redirect(reverse('login_page'))
 
 def upload_report(request: HttpRequest) -> HttpResponse:
     """
@@ -290,13 +291,13 @@ def upload_report(request: HttpRequest) -> HttpResponse:
         HttpResponse: Redirect to annotation page with report text
     """
     if request.method =='POST':
-        # file = request.FILES['file']
-        # file_name = default_storage.save(file.name, file)
-        # # text is extracted as a byte string and needs to be decoded
-        # text = textract.process(file_name).decode()
-        # # delete file after use
-        # default_storage.delete(file_name)
-        return HttpResponse('<p>uploaded report</p>')
+        file = request.FILES['file']
+        file_name = default_storage.save(file.name, file)
+        # text is extracted as a byte string and needs to be decoded
+        text = textract.process(file_name).decode()
+        # delete file after use
+        default_storage.delete(file_name)
+        return HttpResponse(f'<p>{text}</p>')
 
 def approve_pending_report(request: HttpRequest):
     """
@@ -330,6 +331,10 @@ def reject_pending_report(request: HttpRequest):
     Returns:
         HttpResponse: Status response
     """
+    if 'user_id' in request.session:
+        
+        if request.method == 'POST':
+            pass
     pass
 
 def inspect_annotations_view(request: HttpRequest, report_id: int):
